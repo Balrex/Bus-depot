@@ -82,7 +82,7 @@ public class AddDelBusController implements Initializable {
             Pattern patternName = Pattern.compile("([А-Я]{1}[а-я]{1,45})\\s([A-Я]{1}\\W[A-Я]{1}\\W)");
             Matcher matcherName = patternName.matcher(name);
             AddDelBus_BD tmp = new AddDelBus_BD();
-            if (matcherName.matches()==true && matcherNumber.matches()==true) {
+            if (matcherName.matches()==true && matcherNumber.matches()==true && !number.equals("")) {
                 try {
                     tmp.PunIn_BD(number, name);
                     Del_label.setText(Del_label.getText() + "Автобус добален в парк");
