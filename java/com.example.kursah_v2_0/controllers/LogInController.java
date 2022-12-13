@@ -67,15 +67,6 @@ public class LogInController {
                     Parent root = loader.getRoot();
                     Main.mainStage.setScene(new Scene(root));
                 }
-            }/*else {
-                ErrIO_label.setText(ErrIO_label.getText() + "Задержка минута.");
-                count=0;
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }*/
         });
     }
 }
