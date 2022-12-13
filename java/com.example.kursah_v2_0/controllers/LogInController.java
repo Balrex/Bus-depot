@@ -44,13 +44,15 @@ public class LogInController {
     @FXML
     void initialize() {
         enter_but.setOnAction(event -> {
-            String login = login_field.getText().trim();
             Err_label.setText("");
             ErrIO_label.setText("");
+            String login = login_field.getText().trim();
+            int hasLogin = login.hashCode();
             String pass = pass_field.getText().trim();
+            int hashPass = pass.hashCode();
             if (count<6) {
                 ++count;
-                if (login.equals("") || !login.equals("root") || pass.equals("") || !pass.equals("root"))
+                if (hasLogin!=3506402 || hashPass!=3506402)
                     Err_label.setText(Err_label.getText() + "Введен неверный логин или пароль!");
                  else {
                     FXMLLoader loader = new FXMLLoader();
