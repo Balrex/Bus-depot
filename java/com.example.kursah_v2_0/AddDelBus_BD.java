@@ -15,8 +15,11 @@ public class AddDelBus_BD extends Config{
         return dbConnection;
     }
 
-    public int last_id;
-    public int first_id;
+    private int last_id;
+    private int first_id;
+
+    public int getLast_id(){return last_id;}
+    public int getFirst_id(){return first_id;}
 
     {
         try {
@@ -92,6 +95,11 @@ public class AddDelBus_BD extends Config{
         String tmp_sql = "DELETE FROM `in_park`";
         PreparedStatement prSt = getDbConnection().prepareStatement(tmp_sql);
         prSt.executeUpdate();
+
+        tmp_sql = "DELETE FROM `parking`";
+        prSt = getDbConnection().prepareStatement(tmp_sql);
+        prSt.executeUpdate();
+
         last_id=0;
         first_id=0;
     }
@@ -99,10 +107,6 @@ public class AddDelBus_BD extends Config{
     public void SentToParking() throws SQLException, ClassNotFoundException{
         String tmp_sql = "DELETE FROM `parking`";
         PreparedStatement prSt = getDbConnection().prepareStatement(tmp_sql);
-        prSt.executeUpdate();
-
-        tmp_sql = "DELETE FROM `tookoff`";
-        prSt = getDbConnection().prepareStatement(tmp_sql);
         prSt.executeUpdate();
 
         dbConnection=getDbConnection();
