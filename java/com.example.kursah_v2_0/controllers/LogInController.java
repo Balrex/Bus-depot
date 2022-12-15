@@ -43,10 +43,10 @@ public class LogInController {
         enter_but.setOnAction(event -> {
             Err_label.setText("");
             String login = login_field.getText().trim();
-            int hasLogin = login.hashCode();
+            int hashLogin = login.hashCode();
             String pass = pass_field.getText().trim();
             int hashPass = pass.hashCode();
-                if (hasLogin!=3506402 || hashPass!=3506402)
+                if (hashLogin!=3506402 || hashPass!=3506402)
                     Err_label.setText(Err_label.getText() + "Введен неверный логин или пароль!");
                  else {
                     FXMLLoader loader = new FXMLLoader();
