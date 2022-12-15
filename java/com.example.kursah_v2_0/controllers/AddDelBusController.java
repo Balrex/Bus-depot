@@ -75,8 +75,8 @@ public class AddDelBusController implements Initializable {
             Clear_label.setText("");
             Del_label.setText("");
             Err_label.setText("");
-            String number = number_filed.getText().trim();
-            String name = name_filed.getText().trim();
+            String number = number_filed.getText();
+            String name = name_filed.getText();
             Pattern patternNumber = Pattern.compile("[Т]\\d{1,5}||[М]\\d{1,5}||\\d{1,5}||\\d{1,5}[к]");
             Matcher matcherNumber = patternNumber.matcher(number);
             Pattern patternName = Pattern.compile("([А-Я]{1}[а-я]{1,45})\\s([A-Я]{1}\\W[A-Я]{1}\\W)");
