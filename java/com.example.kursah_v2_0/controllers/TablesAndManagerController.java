@@ -37,9 +37,6 @@ public class TablesAndManagerController implements Initializable {
     private Button End_but;
 
     @FXML
-    private Label Err_label;
-
-    @FXML
     private Label IDErr_label;
 
     @FXML
@@ -74,7 +71,6 @@ public class TablesAndManagerController implements Initializable {
     public void initialize (URL url, ResourceBundle resourcesBungle){
         Departure_but.setOnAction(event ->{
             boolean marker=true;
-            Err_label.setText("");
             IDErr_label.setText("");
             String id = IdOut_filed.getText();
             Pattern patternID = Pattern.compile("\\d{1,5}");
@@ -94,7 +90,7 @@ public class TablesAndManagerController implements Initializable {
                 throw new RuntimeException(e);
             }
 
-            if (marker && ID>=tmp_orig.first_id && ID<=tmp_orig.last_id){
+            if (marker && ID>=tmp_orig.getFirst_id() && ID<=tmp_orig.getLast_id()){
                 DB_IN_OUT tmp = new DB_IN_OUT();
                 try {
                     tmp.Departure(ID);
@@ -135,7 +131,6 @@ public class TablesAndManagerController implements Initializable {
 
         Arrival_but.setOnAction(event ->{
             boolean marker=true;
-            Err_label.setText("");
             IDErr_label.setText("");
             String id = IdIn_filed.getText();
             Pattern patternID = Pattern.compile("\\d{1,5}");
@@ -155,7 +150,7 @@ public class TablesAndManagerController implements Initializable {
                 throw new RuntimeException(e);
             }
 
-            if (marker && ID>=tmp_orig.first_id && ID<=tmp_orig.last_id){
+            if (marker && ID>=tmp_orig.getFirst_id() && ID<=tmp_orig.getLast_id()){
                 DB_IN_OUT tmp = new DB_IN_OUT();
                 try {
                     tmp.Arrival(ID);
@@ -195,23 +190,18 @@ public class TablesAndManagerController implements Initializable {
         });
 
         End_but.setOnAction(event -> {
-            DB_IN_OUT tmp = new DB_IN_OUT();
-            Err_label.setText("");
             IDErr_label.setText("");
-            if (tmp.OutOfPark==0) {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("BeforBye.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("BeforBye.fxml"));
 
-                try {
-                    loader.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+            try {
+                loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-                Parent root = loader.getRoot();
-                Main.mainStage.setScene(new Scene(root));
-            }else
-                Err_label.setText(Err_label.getText() + "Невозможно заверщить работу пока не все автобусы вернулись");
+            Parent root = loader.getRoot();
+            Main.mainStage.setScene(new Scene(root));
         });
 
         try {
@@ -225,6 +215,18 @@ public class TablesAndManagerController implements Initializable {
         in_NumberCol.setCellValueFactory(new PropertyValueFactory<>("Number"));
         in_NameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
         parking_table.setItems(data1);
+
+        try {
+            addInf2(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        off_IdCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        off_NumberCol.setCellValueFactory(new PropertyValueFactory<>("Number"));
+        off_NameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        tookoff_table.setItems(data2);
     }
 
     private void addInf1(int action) throws SQLException, ClassNotFoundException {
