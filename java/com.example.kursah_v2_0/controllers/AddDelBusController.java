@@ -151,7 +151,7 @@ public class AddDelBusController implements Initializable {
                 Clear_label.setText("");
                 try {
                     tmp.DelIn_BD(ID);
-                    Del_label.setText(Del_label.getText() + "Автоубс удален из парка");
+                    Del_label.setText(Del_label.getText() + "Автобус удален из парка");
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 } catch (ClassNotFoundException e) {
