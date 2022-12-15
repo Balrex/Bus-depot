@@ -10,9 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class HelloController {
 
@@ -23,26 +22,20 @@ public class HelloController {
     private URL location;
 
     @FXML
+    private Label Err_label;
+
+    @FXML
     private Button No_but;
 
     @FXML
     private Button Yes_but;
 
     @FXML
-    public ImageView image;
+    private ImageView image;
 
     @FXML
     void initialize() {
         No_but.setOnAction(event -> {
-            AddDelBus_BD tmp = new AddDelBus_BD();
-            try {
-                tmp.SentToParking();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("Second-view.fxml"));
 
@@ -57,18 +50,29 @@ public class HelloController {
         });
 
         Yes_but.setOnAction(event -> {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("LogIn.fxml"));
-
+            int marker;
+            Err_label.setText("");
+            DB_IN_OUT tmp =new DB_IN_OUT();
             try {
-                loader.load();
-            } catch (IOException e) {
+                marker=tmp.TookOffCheck();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            Parent root = loader.getRoot();
-            Main.mainStage.setScene(new Scene(root));
+            if (marker==0) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("LogIn.fxml"));
+
+                try {
+                    loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Parent root = loader.getRoot();
+                Main.mainStage.setScene(new Scene(root));
+            }else
+                Err_label.setText(Err_label.getText()+"Нельзя вносить изменения, пока не все автобусы вернулись в парк");
         });
     }
-
 }
-
