@@ -85,21 +85,21 @@ public class AddDelBusController implements Initializable {
             if (matcherName.matches()==true && matcherNumber.matches()==true && !number.equals("")) {
                 try {
                     tmp.PunIn_BD(number, name);
-                    Del_label.setText(Del_label.getText() + "Автобус добален в парк");
+                    Del_label.setText(Del_label.getText() + "Автобус добавлен в парк");
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 } catch (ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
 
-                TableData tmp_data = new TableData(number,name, String.valueOf(tmp.last_id));
+                TableData tmp_data = new TableData(number,name, String.valueOf(tmp.getLast_id()));
                 data.add(tmp_data);
                 inp_IdCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
                 inp_NumberCol.setCellValueFactory(new PropertyValueFactory<>("Number"));
                 inp_NameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
                 in_park_table.setItems(data);
             }else
-                Err_label.setText(Err_label.getText() + "Данные введены не верно");
+                Err_label.setText(Err_label.getText() + "Данные введены неверно");
         });
 
         GoOut_but.setOnAction(event -> {
@@ -145,7 +145,7 @@ public class AddDelBusController implements Initializable {
                 throw new RuntimeException(e);
             }
 
-            if (marker && ID>= tmp.first_id && ID<=tmp.last_id) {
+            if (marker && ID>= tmp.getFirst_id() && ID<=tmp.getLast_id()) {
                 Err_label.setText("");
                 Del_label.setText("");
                 Clear_label.setText("");
@@ -161,7 +161,7 @@ public class AddDelBusController implements Initializable {
                 Clear_label.setText("");
                 Del_label.setText("");
                 Err_label.setText("");
-                Err_label.setText(Err_label.getText() + "Данные введены не верно");
+                Err_label.setText(Err_label.getText() + "Данные введены неверно");
             }
 
             try {
