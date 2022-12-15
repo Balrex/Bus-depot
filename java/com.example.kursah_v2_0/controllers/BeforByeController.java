@@ -32,9 +32,6 @@ public class BeforByeController {
     @FXML
     void initialize() {
         No_but.setOnAction(event -> {
-//            Window tmp = No_but.getScene().getWindow();
-//            tmp.hide();
-//            tmp.setOnHidden(tmp.getOnHidden());
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("hello-view.fxml"));
@@ -47,17 +44,8 @@ public class BeforByeController {
 
             Parent root = loader.getRoot();
             Main.mainStage.setScene(new Scene(root));
-
-//            Parent root = loader.getRoot();
-//            Stage stage = new Stage();
-//            stage.setScene(new Scene(root));
-//            stage.showAndWait();
         });
-        Yes_but.setOnAction(event -> {
-//            Window tmp = Yes_but.getScene().getWindow();
-//            tmp.hide();
-//            tmp.setOnHidden(tmp.getOnHidden());
-
+        Yes_but.setOnAction(event -> {          
             System.exit(0);
         });
     }
