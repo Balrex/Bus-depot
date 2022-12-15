@@ -2,8 +2,10 @@ package com.example.kursah_v2_0;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class LogInController {
 
@@ -23,9 +23,6 @@ public class LogInController {
 
     @FXML
     private URL location;
-
-    @FXML
-    private Label ErrIO_label;
 
     @FXML
     private Label Err_label;
@@ -45,7 +42,6 @@ public class LogInController {
     void initialize() {
         enter_but.setOnAction(event -> {
             Err_label.setText("");
-            ErrIO_label.setText("");
             String login = login_field.getText().trim();
             int hasLogin = login.hashCode();
             String pass = pass_field.getText().trim();
